@@ -1,29 +1,19 @@
-# README #
+<h1>STADTSALAT - Coding Challenge</h1>
 
-This README would normally document whatever steps are necessary to get your application up and running.
+Wir bei STADTSALAT wollen einen URL-Shortener für Salat und Bowl Lieblings-Konfigurationen ermöglichen. 
+Dein Junior Kollege bittet dich um ein Code Review für das Ticket.
+Dabei sollen möglichst wenig alphanumerische Zeichen in die URL mit einfließen. Es ist wichtig, dass short Urls langfristig aufgelöst werden können, da diese über Social Media geteilt werden.
 
-### What is this repository for? ###
+Da wir Common Code Ownership leben, refactore den Code gerne , so dass er die Aufgabe erfüllt.
 
-* Quick summary
-* Version
-* [Learn Markdown](https://bitbucket.org/tutorials/markdowndemo)
+Mache gerne Verbesserungen die dir sinnvoll erscheinen, sodass der shortener in Produktion verwendet werden kann.
+<br>
+<br>
+----
+<i>[engish version]</i><br><br>
+We at STADTSALAT want to provide a url shortener to enable user to share their salad and bowl favorites.
+Your junior colleague asks for a code review for this topic.
+The shortener shall use as few alphanumeric characters as possible. The urls are used in social media, so it is key to ensure their durability.
 
-### How do I get set up? ###
+Since we love common code ownership, feel free to refactor code as you see fit. The goal is to use the shortener in production environment. 
 
-* Summary of set up
-* Configuration
-* Dependencies
-* Database configuration
-* How to run tests
-* Deployment instructions
-
-### Contribution guidelines ###
-
-* Writing tests
-* Code review
-* Other guidelines
-
-### Who do I talk to? ###
-
-* Repo owner or admin
-* Other community or team contact
