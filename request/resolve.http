@@ -1,0 +1,2 @@
+GET localhost:8080/resolve/c1YsL
+Content-Type: application/json
