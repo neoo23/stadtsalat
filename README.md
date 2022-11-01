@@ -1,20 +1,27 @@
 #STADTSALAT - Coding Challenge
 
-Wir bei STADTSALAT wollen einen URL-Shortener für Salat und Bowl Lieblings-Konfigurationen ermöglichen. 
-Dein Junior Kollege bittet dich um ein Code Review für das Ticket.
-Dabei sollen möglichst wenig alphanumerische Zeichen in die URL mit einfließen. Es ist wichtig, dass Short-Urls langfristig aufgelöst werden können, da diese über Social Media geteilt werden.
+Wir bei STADTSALAT wollen einen URL-Shortener für Salat- und Bowlkonfigurationen ermöglichen.
 
+Dabei sollen möglichst wenig alphanumerische Zeichen in die URL mit einfließen. Es ist wichtig, dass Short-Urls (Slugs) langfristig aufgelöst werden können, da diese über Social Media geteilt werden.
+
+Dein Kollege hat ein ersten Entwurf erstellt, du sollst ihn für eine prototypische Verwendung finalisieren.
 Da wir Common Code Ownership leben, refactore den Code gerne so, dass er die Aufgabe erfüllt.
+Mache gerne Verbesserungen, die dir sinnvoll erscheinen, sodass der Shortener in Produktion verwendet werden kann.
 
-Mache gerne Verbesserungen die dir sinnvoll erscheinen, sodass der shortener in Produktion verwendet werden kann.
+Ziele der Aufgabe:
 
+* Wunsch Slug: 
+  Ein Nutzer soll beim shorten einer URL optional einen Wunschnamen als Slug vergeben können.
 
-----
-*[engish version]*
+* Verbindung zu einem User: 
+  Die Nutzertabelle soll verwendet werden und die Verbindung zu einem Nutzer soll hergestellt werden.
+  Keine Authentifizierung des Users, wir glauben dem Request für die Nutzer-Assoziation
+  Keine API um den User anzulegen (Test-Eintrag in der DB reicht)
 
-We at STADTSALAT want to provide an url shortener to enable user to share their salad and bowl favorites.
-Your junior colleague asks for a code review for this topic.
-The shortener shall use as few alphanumeric characters as possible. The urls are used in social media, so it is key to ensure their durability.
+* Slug löschen:
+  Via eines API Endpunkts, soll ein User seine Slugs wieder löschen können
 
-Since we love common code ownership, feel free to refactor code as you see fit. The goal is to use the shortener in production environment. 
+* Hybride Datenhaltung: 
+  Die Slugs sollen hohen Belastungen standhalten. Dafür soll eine geeignete Caching Lösung eingebaut werden. Gleichzeitig müssen die Slugs natürlich persistiert werden.
 
+Für alle Fragen stehen dir deine neuen Kollegen gerne zur Seite!
