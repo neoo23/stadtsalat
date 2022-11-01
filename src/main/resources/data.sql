@@ -1,13 +1,5 @@
-DROP TABLE IF EXISTS APPUSER;
+INSERT INTO APPUSER (id, first_name, last_name)
+VALUES (1, 'Hans', 'Herbert'),
+       (2, 'Lars', 'Alberts'),
+       (3, 'Till', 'Meier');
 
-CREATE TABLE APPUSER
-(
-    id         INT AUTO_INCREMENT PRIMARY KEY,
-    first_name VARCHAR(150) NOT NULL,
-    last_name  VARCHAR(150) NOT NULL
-);
-
-INSERT INTO APPUSER (first_name, last_name)
-VALUES ('Hans', 'Herbert'),
-       ('Lars', 'Alberts'),
-       ('Till', 'Meier');

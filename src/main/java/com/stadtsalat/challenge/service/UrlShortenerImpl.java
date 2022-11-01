@@ -2,11 +2,14 @@ package com.stadtsalat.challenge.service;
 
 import com.stadtsalat.challenge.domain.UrlData;
 import com.stadtsalat.challenge.domain.User;
+import com.stadtsalat.challenge.repository.UrlDataRepository;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.PostConstruct;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Optional;
@@ -15,8 +18,19 @@ import java.util.stream.Collectors;
 @Service
 public class UrlShortenerImpl implements UrlShortener {
 
-    // slug->url
+    private final UrlDataRepository urlDataRepository;
+
+    // slug->url cache
     HashMap<String, UrlData> urls = new HashMap<String, UrlData>();
+
+    public UrlShortenerImpl(UrlDataRepository urlDataRepository) {
+        this.urlDataRepository = urlDataRepository;
+    }
+
+    @PostConstruct
+    void loadUrls() {
+        this.urlDataRepository.findAll().forEach(u -> urls.put(u.getSlug(), u));
+    }
 
     @Override
     public ResponseEntity<UrlData> storeUrl(String url, String slug_, Optional<User> user) {
@@ -41,10 +55,12 @@ public class UrlShortenerImpl implements UrlShortener {
         }
 
         if (slug.isEmpty()) {
-            return new ResponseEntity<UrlData>(new UrlData("no slug found error", url, user), HttpStatus.INTERNAL_SERVER_ERROR);
+            return new ResponseEntity<UrlData>(new UrlData(null, "no slug found error", url, null), HttpStatus.INTERNAL_SERVER_ERROR);
         }
+        // save urlData
+        UrlData urlData = new UrlData(null, slug, url, user.orElse(null));
+        urlDataRepository.save(urlData);
         // save slug
-        UrlData urlData = new UrlData(slug, url, user);
         urls.put(slug, urlData);
         return new ResponseEntity<UrlData>(urlData, HttpStatus.OK);
     }
@@ -56,9 +72,11 @@ public class UrlShortenerImpl implements UrlShortener {
 
     @Override
     public ResponseEntity<List<UrlData>> deleteByLastName(String lastName) {
+        if(lastName.isEmpty()) {
+            return new ResponseEntity(Collections.emptyList(), HttpStatus.OK);
+        }
         List<UrlData> toDelete = urls.values().stream()
-                .filter(u -> u.getUser().isPresent())
-                .filter(u -> u.getUser().get().getLastName().equalsIgnoreCase(lastName))
+                .filter(u -> lastName.equalsIgnoreCase(u.getUser() != null ? u.getUser().getLastName() : ""))
                 .collect(Collectors.toList());
         toDelete.forEach(u -> urls.remove(u.getSlug()));
         return new ResponseEntity(toDelete, HttpStatus.OK);
