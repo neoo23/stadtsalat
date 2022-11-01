@@ -7,10 +7,12 @@ import com.stadtsalat.challenge.service.UrlShortener;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Optional;
 
 @RestController
 public class UrlShortenerController {
+
     private final UrlShortener urlShortener;
     private final UserRepository userRepository;
 
@@ -31,4 +33,13 @@ public class UrlShortenerController {
         return urlShortener.resolve(slug);
     }
 
+    @DeleteMapping("/deleteByLastName/{lastName}")
+    public ResponseEntity<List<UrlData>> deleteByLastName(@PathVariable(value = "lastName") String lastName) {
+        return urlShortener.deleteByLastName(lastName);
+    }
+
+    @GetMapping("/urls")
+    public ResponseEntity<List<UrlData>> urls() {
+        return urlShortener.urls();
+    }
 }

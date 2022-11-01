@@ -8,7 +8,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class UrlShortenerImpl implements UrlShortener {
@@ -51,4 +53,21 @@ public class UrlShortenerImpl implements UrlShortener {
     public ResponseEntity<UrlData> resolve(String slug) {
         return new ResponseEntity<UrlData>(urls.get(slug), HttpStatus.OK);
     }
+
+    @Override
+    public ResponseEntity<List<UrlData>> deleteByLastName(String lastName) {
+        List<UrlData> toDelete = urls.values().stream()
+                .filter(u -> u.getUser().isPresent())
+                .filter(u -> u.getUser().get().getLastName().equalsIgnoreCase(lastName))
+                .collect(Collectors.toList());
+        toDelete.forEach(u -> urls.remove(u.getSlug()));
+        return new ResponseEntity(toDelete, HttpStatus.OK);
+    }
+
+    @Override
+    public ResponseEntity<List<UrlData>> urls() {
+        return new ResponseEntity(urls.values(), HttpStatus.OK);
+    }
+
+
 }
