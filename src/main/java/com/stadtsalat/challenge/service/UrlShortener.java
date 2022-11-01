@@ -5,7 +5,7 @@ import org.springframework.http.ResponseEntity;
 
 public interface UrlShortener {
 
-    public ResponseEntity<String> storeUrl(String url);
+    ResponseEntity<String> storeUrl(String url, String slug);
 
-    public ResponseEntity<String> resolve(String slug);
+    ResponseEntity<String> resolve(String slug);
 }

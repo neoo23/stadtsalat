@@ -7,5 +7,6 @@ import lombok.Data;
 public class ShortenRequest {
 
     private String url;
+    private String slug;
 
 }

@@ -12,8 +12,8 @@ public class UrlShortenerController {
 
 
     @PostMapping("/shorten/")
-    public ResponseEntity<String> shortenUrl(@RequestBody ShortenRequest request) {
-        return urlShortener.storeUrl(request.getUrl());
+    public ResponseEntity<String> shortenUrl(@RequestBody ShortenRequest req) {
+        return urlShortener.storeUrl(req.getUrl(), req.getSlug());
     }
 
     @GetMapping("/resolve/{slug}")
