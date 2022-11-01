@@ -13,12 +13,14 @@ public class UrlShortenerImpl implements UrlShortener {
 
     @Override
     public String storeUrl(String url) {
-        String slug = "";
-        do {
-            slug = RandomStringUtils.randomAlphanumeric(5);
-        } while (!urls.containsKey(slug));
-        urls.put(slug, url);
-        return slug;
+        for(int i=0; i<10 /* paranoia check */ ;) {
+            String slug = RandomStringUtils.randomAlphanumeric(5);
+            if (!urls.containsKey(slug)) {
+                urls.put(slug, url);
+                return slug;
+            }
+        }
+        return "error";
     }
 
     @Override
