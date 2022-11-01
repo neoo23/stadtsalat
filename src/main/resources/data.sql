@@ -8,5 +8,6 @@ CREATE TABLE APPUSER
 );
 
 INSERT INTO APPUSER (first_name, last_name)
-VALUES ('Test', 'User'),
-       ('Other', 'User');
+VALUES ('Hans', 'Herbert'),
+       ('Lars', 'Alberts'),
+       ('Till', 'Meier');

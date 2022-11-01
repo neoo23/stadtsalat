@@ -8,5 +8,5 @@ public class ShortenRequest {
 
     private String url;
     private String slug;
-
+    private String lastName;
 }
